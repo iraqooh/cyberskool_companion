@@ -120,4 +120,4 @@ Inspired by open-source research in NLP & education technology
 ## ✉️ Contact
 
 For questions or collaboration:
-Mr. Harry Iraku — (LinkedIn)[https://linkedin.com/iraqooh] | (GitHub)[https://github.com/iraqooh/]
+Mr. Harry Iraku — [LinkedIn](https://linkedin.com/iraqooh) | [GitHub](https://github.com/iraqooh/)
