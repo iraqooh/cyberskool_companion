@@ -1,0 +1,23 @@
+Cyberskool Companion Standard Features
+
+These are the essential capabilities expected from any reliable AI summarizer.
+
+Core Summarization
+Automatic Summarization: Generates a condensed version of the input text.
+Extractive Summarization: Selects key sentences directly from the original text.
+Length Control: Allows customization of summary length (short, medium, long).
+Single Document Summarization: Handles summarization of one document at a time.
+Multi-Language Support (basic): Supports summarization in common languages like English.
+
+Usability & Integration
+Document Format Support: Accepts plain text, PDFs, Word docs, or pasted input.
+Save & Export Options: Export summary to PDF, DOCX, TXT.
+Drag-and-Drop Upload: Simplifies file selection in graphical interfaces.
+API Integration: Allows integration via a simple REST API.
+
+Security & Privacy
+Data Privacy Compliance (basic): Adheres to standard privacy policies (e.g. GDPR).
+Input/Output Encryption: Secures data in transit using HTTPS/TLS.
+
+Advanced Features
+These offer enhanced intelligence, flexibility, and performance, typically found in premium or specialized summarizers.

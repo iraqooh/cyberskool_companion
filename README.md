@@ -35,13 +35,13 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-4. Run the Application
+4. Run the Application (Dev Mode)
 
 ```bash
 python app.py
 ```
 
-Access the summarizer at: http://localhost:5000/summarize
+Access the Web UI at: http://localhost:5000/
 
 ## 📥 API Usage
 
@@ -49,7 +49,9 @@ Access the summarizer at: http://localhost:5000/summarize
 
 Headers:
 ```bash
-Content-Type: application/json OR multipart/form-data
+Content-Type: application/json 
+OR 
+Content-Type: multipart/form-data
 ```
 
 Body Options:
@@ -65,12 +67,14 @@ File input (form-data):
 ```vbnet
 file: <uploaded .pdf/.docx/.txt file>
 length: short|medium|long
+model: facebook/bart-large-cnn (optional and TBD)
 ```
 
 Response:
 ```json
 {
-  "summary": "This is the AI-generated summary of your content."
+  "status": "OK",
+  "data": "This is the AI-generated summary of your content."
 }
 ```
 
@@ -78,31 +82,59 @@ Response:
 
 Returns status of the application.
 
+```json
+{ "status": "ok" }
+```
+
 ## 🧠 Model
 
-Uses facebook/bart-large-cnn from Hugging Face Transformers, a powerful encoder-decoder transformer architecture fine-tuned for summarization tasks.
+Uses sshleifer/distilbart-cnn-12-6 from Hugging Face Transformers, a simple encoder-decoder transformer architecture. Support for additional models will be extended and enable users to choose the model.
 
 ## 🗂️ Project Structure
 
 ```pgsql
-cyberskool-companion/
-├── app.py                  # Flask application
-├── summarizer.py           # Model loading & summarization
+cyberskool_companion/
+├── app.py                  
+├── summarizer.py    
 ├── utils/
-│   └── text_extractor.py   # File-to-text conversion
-├── templates/              # (Optional) UI templates
-├── static/                 # (Optional) CSS/JS for UI
+├── templates/              
+├── static/                 
+├── docs/
+├── tests/
 ├── requirements.txt
+├── Dockerfile
+├── nginx.conf
+├── LICENSE
 └── README.md
 ```
 
-## 🐳 Docker
+## 🐳 Docker (Production)
 
-Create a Dockerfile to containerize the app.
+1. Build the image
 
 ```bash
-docker build -t cyberskool-companion .
-docker run -p 5000:5000 cyberskool-companion
+docker build -t cyberskool_companion .
+```
+
+2. Run with Gunicorn
+
+```bash
+docker run -d -p 8000:8000 cyberskool_companion
+```
+
+3. NGINX Reverse Proxy
+
+```ngnix
+server {
+    listen 80
+    server_name IP;
+
+    location / {
+        proxy_pass http://localhost:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
 ```
 
 ## 📖 License
@@ -113,7 +145,15 @@ You are free to use, modify, and distribute this software under the terms of the
 
 ## 🙌 Credits
 
-Built with Hugging Face Transformers
+Built with:
+
+- Hugging Face Transformers
+
+- PyTorch
+
+- Flask
+
+- TailwindCSS
 
 Inspired by open-source research in NLP & education technology
 

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="POST" enctype="multipart/form-data" class="space-y-6" action="/">
+  <div class="grid gap-4 md:grid-cols-2">
+    <div>
+      <label class="block mb-1 font-semibold">Paste Text</label>
+      <textarea name="text" rows="8" class="w-full p-3 border dark:border-gray-700 rounded bg-gradient-to-br from-green-200 to-yellow-100"></textarea>
+    </div>
+
+    <div>
+      <label class="block mb-1 font-semibold">Or Upload File (TXT, PDF, DOCX)</label>
+      <div id="dropzone" class="w-full p-5 border-2 border-dashed dark:border-gray-600 rounded cursor-pointer text-center flex flex-col justify-center" style="height: 215px;">
+        <p class="text-sm">Drag & drop your file here or click to select</p>
+        <input id="fileInput" type="file" name="file" accept=".txt,.pdf,.docx" class="hidden" />
+        <p id="filename" class="text-sm mt-2 text-green-600"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid gap-4 md:grid-cols-2">
+    <div>
+      <label class="block mb-1 font-semibold">Summary Length</label>
+      <select name="length" class="w-full p-2 border rounded dark:border-gray-700">
+        <option value="short">Short</option>
+        <option value="medium" selected>Medium</option>
+        <option value="long">Long</option>
+      </select>
+    </div>
+
+    <div>
+      <label class="block mb-1 font-semibold">Model</label>
+      <select name="model" class="w-full p-2 border rounded dark:border-gray-700">
+        <option value="sshleifer/distilbart-cnn-12-6" selected>DistilBART CNN</option>
+        <option value="facebook/bart-large-cnn">BART Large CNN</option>
+        <option value="t5-small">T5 Small</option>
+      </select>
+    </div>
+  </div>
+
+  <button class="px-5 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Summarize</button>
+</form>
+
+{% if summary %}
+  <div class="mt-8">
+    <h2 class="text-lg font-bold">Summary</h2>
+    <div class="mt-2 p-4 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded">
+      <p>{{ summary }}</p>
+    </div>
+  </div>
+{% endif %}
+{% endblock %}

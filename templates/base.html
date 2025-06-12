@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" class="transition duration-300 ease-in-out">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="refresh" content="2"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="static/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/favicon-16x16.png">
+    <link rel="manifest" href="static/site.webmanifest">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Cyberskool Companion</title>
+</head>
+<body class="bg-gradient-to-br from-green-500 to-yellow-200 dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <nav id="navBar" class="bg-gray-100 dark:bg-gray-800 shadow px-4 py-3 flex justify-between items-center">
+        <a href="/"><h1 class="text-xl font-bold text-blue-600 dark:text-blue-300 flex">
+            <img src="static/favicon-32x32.png" alt="logo" class="mr-3">
+            Cyberskool Companion
+        </h1></a>
+        <!-- <button id="modeToggle" class="text-sm px-3 py-1 rounded border dark:border-white border-gray-800 hover:bg-black hover:text-white">
+            Toggle Dark Mode
+        </button> -->
+    </nav>
+
+    <!-- Main section -->
+    <main class="flex-1 container mx-auto px-4 py-6">
+        {% block content %}{% endblock %}
+    </main>
+
+    <script>
+        // Mode toggling logic
+        // const toggle = document.getElementById("modeToggle")
+        // const htmlElement = document.documentElement
+
+        // if (localStorage.theme === 'dark') {
+        //     htmlElement.classList.add('dark')
+        // } else {
+        //     htmlElement.classList.remove('dark')
+        // }
+
+        // toggle.addEventListener("click", () => {
+        //     htmlElement.classList.toggle("dark")
+
+        //     if (htmlElement.classList.contains('dark')) {
+        //         localStorage.theme = 'dark'
+        //     } else {
+        //         localStorage.theme = 'light'
+        //     }
+        // })
+
+        const dropzone = document.getElementById('dropzone')
+        const fileInput = document.getElementById('fileInput')
+        const filename = document.getElementById('filename')
+
+        dropzone.addEventListener('click', () => fileInput.click())
+
+        dropzone.addEventListener('dragover', (e) => {
+            e.preventDefault()
+            dropzone.classList.add('bg-blue-50')
+        })
+
+        dropzone.addEventListener('dragleave', () => dropzone.classList.remove('bg-blue-50'))
+
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault()
+            dropzone.classList.remove('bg-blue-50')
+            fileInput.files = e.dataTransfer.files
+            filename.innerText = e.dataTransfer.files[0].name
+            dropzone.classList.add('bg-blue-50')
+        })
+
+        fileInput.addEventListener('change', () => {
+            filename.innerText = fileInput.files[0]?.name || ''
+        })
+    </script>
+</body>
+</html>

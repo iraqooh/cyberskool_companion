@@ -1,0 +1,11 @@
+flask
+torch
+transformers
+python-docx
+PyMuPDF
+pdfminer.six
+python-dotenv
+chardet
+flask-cors
+gunciorn
+pdfplumber
