@@ -59,7 +59,8 @@ Text input (JSON):
 ```json
 {
   "text": "Paste your long article here...",
-  "length": "short" // options: short, medium, long
+  "length": "short", // options: short, medium, long
+  "model": "facebook/bart-large-cnn"
 }
 ```
 
